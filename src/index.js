@@ -41,6 +41,7 @@ async function onSubmit(event) {
       );
       clearGallery();
       hideLoadMoreBtn();
+      return;
     } else {
       Notify.success(`Hooray! We found ${dataLoading.totalHits} images.`);
     }
