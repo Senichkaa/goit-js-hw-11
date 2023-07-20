@@ -33,5 +33,5 @@ const createCardInterface = ({
 </div>`;
 };
 
-export default drawCardInterface = array =>
-  array.map(createCardInterface).join('');
+const drawCardInterface = array => array.map(createCardInterface).join('');
+export default drawCardInterface;
