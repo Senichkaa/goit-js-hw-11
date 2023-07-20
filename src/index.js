@@ -10,7 +10,7 @@ const gallery = document.querySelector('.gallery');
 const loadMore = document.querySelector('.load-more-btn');
 
 let totalPages = 0;
-let currentPage = 1;
+let currentPage = null;
 let loading = false;
 let userQuery = '';
 let lightbox;
@@ -43,13 +43,16 @@ async function onSubmit(event) {
       hideLoadMoreBtn();
     } else {
       Notify.success(`Hooray! We found ${dataLoading.totalHits} images.`);
-      loadMoreImg();
     }
+    gallery.innerHTML = drawCardInterface(dataLoading.hits);
+    showLoadMoreBtn();
+
+    allPhotosInQuery();
+
+    lightbox = new SimpleLightbox('.gallery a');
   } catch (error) {
     console.log(error);
   }
-  lightbox = new SimpleLightbox('.gallery a');
-  clearGallery();
 }
 
 async function loadMoreImg() {
@@ -70,6 +73,10 @@ async function loadMoreImg() {
     loading = false;
   }
 
+  allPhotosInQuery();
+}
+
+function allPhotosInQuery() {
   if (currentPage === totalPages) {
     Notify.info('Sorry. there is all photos about your query');
     hideLoadMoreBtn();

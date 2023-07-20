@@ -11,8 +11,8 @@ export async function fetchFromApi(query, page = 1) {
         image_type: 'photo',
         orientation: 'horizontal',
         safesearch: 'true',
-        per_page: 40,
         page,
+        per_page: 40,
       },
     });
     console.log(response.data);
