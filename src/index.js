@@ -57,18 +57,16 @@ async function loadMoreImg() {
   currentPage += 1;
 
   try {
-    const loadingData = await fetchFromApi(userQuery, currentPage);
+    const dataLoading = await fetchFromApi(userQuery, currentPage);
     gallery.insertAdjacentHTML(
       'beforeend',
-      drawCardInterface(loadingData.hits)
+      drawCardInterface(dataLoading.hits)
     );
 
     lightbox.refresh();
     showLoadMoreBtn();
   } catch (error) {
     console.log(error);
-    loading = false;
-  } finally {
     loading = false;
   }
 
