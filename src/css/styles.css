@@ -31,6 +31,10 @@ button {
 }
 
 .search-div {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
   background-color: rgb(64, 86, 180);
   padding: 15px 0;
 }

@@ -13,7 +13,7 @@ let totalPages = 0;
 let currentPage = 1;
 let loading = false;
 let userQuery = '';
-let lightbox = null;
+let lightbox;
 
 searchForm.addEventListener('submit', onSubmit);
 loadMore.addEventListener('click', loadMoreImg);
@@ -32,20 +32,24 @@ async function onSubmit(event) {
   }
 
   try {
-    const data = await fetchFromApi(userQuery, currentPage);
+    const dataLoading = await fetchFromApi(userQuery, currentPage);
     searchForm.reset();
-    if (!data.total) {
+    totalPages = Math.ceil(dataLoading.totalHits / 40);
+    if (!dataLoading.total) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+      clearGallery();
+      hideLoadMoreBtn();
     } else {
-      Notify.success(`Hooray! We found ${data.totalHits} images.`);
+      Notify.success(`Hooray! We found ${dataLoading.totalHits} images.`);
+      loadMoreImg();
     }
   } catch (error) {
     console.log(error);
   }
-
-  loadMoreImg();
+  lightbox = new SimpleLightbox('.gallery a');
+  clearGallery();
 }
 
 async function loadMoreImg() {
@@ -58,9 +62,13 @@ async function loadMoreImg() {
       'beforeend',
       drawCardInterface(loadingData.hits)
     );
+
+    lightbox.refresh();
     showLoadMoreBtn();
   } catch (error) {
     console.log(error);
+    loading = false;
+  } finally {
     loading = false;
   }
 
