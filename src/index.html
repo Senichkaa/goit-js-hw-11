@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./svg/symbol-defs.svg" />
     <title>Page title</title>
   </head>
   <body>
@@ -15,14 +17,24 @@
           placeholder="Search images..."
           class="input"
         />
-        <button type="submit">Search</button>
+        <button type="submit" class="submit-btn">
+          <svg class="icon">
+            <use href="./svg/symbol-defs.svg#icon-search"></use>
+          </svg>
+        </button>
       </form>
     </div>
-    <div class="gallery">
-      <!-- Картки зображень -->
+    <div class="container">
+      <div class="gallery">
+        <!-- Картки зображень -->
+      </div>
     </div>
     <div class="load-more-btn">
-      <button type="button" class="load-more">Load more</button>
+      <button type="button" class="load-more">
+        <svg class="icon">
+          <use href="./svg/symbol-defs.svg#icon-more"></use>
+        </svg>
+      </button>
     </div>
     <script src="./index.js" type="module"></script>
   </body>

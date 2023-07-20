@@ -5,14 +5,17 @@ const BASE_URL = 'https://pixabay.com/api/';
 export async function fetchFromApi(query, page = 1) {
   try {
     const response = await axios.get(`${BASE_URL}`, {
-      key: '38364804-bc717e421fc678381fef6bf71',
-      q: `${query}`,
-      image_type: 'photo',
-      orientation: 'horizontal',
-      safesearch: 'true',
-      per_page: 40,
-      page,
+      params: {
+        key: '38364804-bc717e421fc678381fef6bf71',
+        q: `${query}`,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        safesearch: 'true',
+        per_page: 40,
+        page,
+      },
     });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
